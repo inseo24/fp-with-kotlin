@@ -3,8 +3,8 @@
 
 <details>
   <summary>학습 자료1</summary>
-    
-    [[해당 문서는 이 링크의 글을 번역해 정리한 것입니다.](https://doordash.engineering/2022/03/22/how-to-leverage-functional-programming-in-kotlin-to-write-better-cleaner-code/)]
+
+  [[해당 문서는 이 링크의 글을 번역해 정리한 것입니다.](https://doordash.engineering/2022/03/22/how-to-leverage-functional-programming-in-kotlin-to-write-better-cleaner-code/)]
 
 1. 함수형 프로그래밍(FP)이란?
     - 프로그램이 함수의 적용과 조합으로 구성되는 프로그래밍 패러다임
