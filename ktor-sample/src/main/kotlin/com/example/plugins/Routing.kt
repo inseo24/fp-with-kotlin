@@ -1,5 +1,7 @@
 package com.example.plugins
 
+import com.example.user.User
+import com.example.user.UserService
 import io.ktor.http.*
 import io.ktor.resources.*
 import io.ktor.server.application.*
@@ -23,9 +25,10 @@ object Users {
                     call.respond(HttpStatusCode.Created, id)
                 }
                 put {
-                    val id = call.parameters["id"]?.toInt() ?: throw IllegalArgumentException("Invalid ID")
-                    val user = call.receive<com.example.plugins.User>()
-                    userService.update(id, user)
+                    val request = call.receive<User>()
+                    val currentUser = userService.read(request.id)
+                    val updatedUser = currentUser?.update(request.name, request.age) ?: throw NoSuchElementException("No User")
+                    userService.update(currentUser.id, updatedUser)
                     call.respond(HttpStatusCode.OK)
                 }
             }
