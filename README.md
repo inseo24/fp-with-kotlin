@@ -89,4 +89,4 @@
     - Exposed : Kotlin을 위한 ORM
 5. 코드는 거의 기본 생성되는 예제 코드 수준에 Kodein만 추가한 상태. 추후 개선 예정
 
-<details>
+</details>
