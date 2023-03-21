@@ -87,7 +87,16 @@
     - Ktor : Jetbrains 개발, 코루틴을 사용해 비동기 및 논블록킹 지원
     - Kodein : Kotlin으로 작성된 DI Framework
     - Exposed : Kotlin을 위한 ORM
-5. 코드는 거의 기본 생성되는 예제 코드 수준에 Kodein만 추가한 상태. 추후 개선 예정
+5. 코드는 거의 기본 생성되는 예제 코드 수준에 Kodein만 추가한 상태. -> 더 개선 예정
+    - Kodein 깃헙 코드를 보며 리팩토링 진행
+    - 3/22 주요 변경 사항
+      - `configureRouting` 함수를 정의하지 않고 `Users.Controller` 클래스에서 URL 경로를 처리 가능해짐
+      - URL 경로를 캡슐화함
+        - `@Resource` 를 사용해 Routing 코드 변경
+      - 상세 변경 관련 정보
+        - `Application.configureRouting` 함수에 직접 정의했던 것을 `Users.Controller` 클래스에서 `Routing` 객체를 확장해 처리
+        - 위 변경에 따라 `Application.module` 함수에서 `configureRouting` 함수 호출 대신 `kodeinApplication` 함수를 호출하고 `bindSingletone` 함수로 `Database`, `UserService` 등록함
+        - `configureRouting` 함수를 정의하지 않고 `Users.Controller` 클래스에서 URL 경로를 처리 가능해짐
 
 </details>
 
