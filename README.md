@@ -78,7 +78,7 @@
 
 
 <details>
-  <summary>학습 자료2 - Ktor, Kodein, Exposed</summary>
+  <summary>학습 자료2 - Ktor, Kodein, Exposed(ktor-sample)</summary>
 
 1. 기본적으로 Intellij에서 설정으로 Dependency 추가해서 만들 수 있는 건 동일
 2. 다만, Kodein은 따로 설정해줘야 하고 코틀린 버전과 호환되는지 체크 필요
@@ -89,4 +89,40 @@
     - Exposed : Kotlin을 위한 ORM
 5. 코드는 거의 기본 생성되는 예제 코드 수준에 Kodein만 추가한 상태. 추후 개선 예정
 
+</details>
+
+<details>
+  <summary>학습 자료3 - 예시 프로젝트(coffee-ordering-system)</summary>
+  
+1. 패키지 구조
+
+  ```sql
+  
+  |-- src
+  |   |-- main
+  |   |   |-- kotlin
+  |   |   |   |-- com
+  |   |   |   |   |-- example
+  |   |   |   |   |   |-- coffee
+  |   |   |   |   |   |   |-- route
+  |   |   |   |   |   |   |-- service
+  |   |   |   |   |   |   |-- repository
+  |   |   |   |   |   |   |-- domain
+  |   |   |   |   |   |   |-- dto
+  |   |   |   |   |   |   |-- exception
+  |   |   |   |   |   |   |-- config
+  |   |   |-- resources
+  |   |   |   |-- application.conf
+  |   |-- test
+  |   |   |-- kotlin
+  |   |   |   |-- com
+  |   |   |   |   |-- example
+  |   |   |   |   |   |-- coffee
+  |   |   |   |   |   |   |-- route
+  |   |   |   |   |   |   |-- service
+  |   |   |   |   |   |   |-- repository
+  |-- build.gradle.kts
+  |-- README.md
+  ```
+  
 </details>
