@@ -1,8 +1,21 @@
 ### 함수형 프로그래밍 관련 자료 정리
 
+<details>
+  <summary>학습 자료2 - Ktor, Kodein, Exposed</summary>
+
+1. 기본적으로 Intellij에서 설정으로 Dependency 추가해서 만들 수 있는 건 동일
+2. 다만, Kodein은 따로 설정해줘야 하고 코틀린 버전과 호환되는지 체크 필요
+3. DB Config를 현재는 코드상에서 받고 있는데 Ktor에서 권장하는 방식인 application.conf 로 추후 뺄 예정
+4. 기본 지식
+    - Ktor : Jetbrains 개발, 코루틴을 사용해 비동기 및 논블록킹 지원
+    - Kodein : Kotlin으로 작성된 DI Framework
+    - Exposed : Kotlin을 위한 ORM
+5. 코드는 거의 기본 생성되는 예제 코드 수준에 Kodein만 추가한 상태. 추후 개선 예정
 
 <details>
-  <summary>학습 자료1</summary>
+
+<details>
+  <summary>학습 자료1 - FP with Kotlin</summary>
 
   [[해당 문서는 이 링크의 글을 번역해 정리한 것입니다.](https://doordash.engineering/2022/03/22/how-to-leverage-functional-programming-in-kotlin-to-write-better-cleaner-code/)]
 
