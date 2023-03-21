@@ -7,6 +7,7 @@ import org.kodein.di.DI
 import org.kodein.di.DIAware
 import org.kodein.di.Instance
 import org.kodein.di.bind
+import org.kodein.di.bindings.NoArgBindingDI
 import org.kodein.di.instance
 import org.kodein.di.singleton
 import org.kodein.type.jvmType
@@ -40,6 +41,6 @@ abstract class KodeinController : DIAware {
     abstract fun Routing.registerRoutes()
 }
 
-inline fun <reified T : Any> DI.MainBuilder.bindSingleton(crossinline callback: (DI) -> T) {
-    bind<T>() with singleton { callback(this@singleton.di) }
+inline fun <reified T : Any> DI.MainBuilder.bindSingleton(crossinline instanceProvider: NoArgBindingDI<Any>.() -> T) {
+    bind<T>() with singleton { instanceProvider.invoke(this) }
 }
