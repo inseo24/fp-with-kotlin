@@ -93,10 +93,17 @@
       - `configureRouting` 함수를 정의하지 않고 `Users.Controller` 클래스에서 URL 경로를 처리 가능해짐
       - URL 경로를 캡슐화함
         - `@Resource` 를 사용해 Routing 코드 변경
+      - `bindSingletom()` 함수 : instance() 받을 수 있게 수정
+        - `module()` 함수에서 싱글턴 객체 만드는 함수 사용 통일
+      - `application.conf`에 DB config 추가
+        - `DatabaseFactory`에 하드코딩된 DB 정보 삭제 후 config(singleton)에서 가져오게 수정
+        - `main()` 함수 수정 : `EngineMain.main(args)`로 시작하게 수정
+
       - 상세 변경 관련 정보
         - `Application.configureRouting` 함수에 직접 정의했던 것을 `Users.Controller` 클래스에서 `Routing` 객체를 확장해 처리
         - 위 변경에 따라 `Application.module` 함수에서 `configureRouting` 함수 호출 대신 `kodeinApplication` 함수를 호출하고 `bindSingletone` 함수로 `Database`, `UserService` 등록함
         - `configureRouting` 함수를 정의하지 않고 `Users.Controller` 클래스에서 URL 경로를 처리 가능해짐
+      
 
 </details>
 
