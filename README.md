@@ -98,6 +98,7 @@
       - `application.conf`에 DB config 추가
         - `DatabaseFactory`에 하드코딩된 DB 정보 삭제 후 config(singleton)에서 가져오게 수정
         - `main()` 함수 수정 : `EngineMain.main(args)`로 시작하게 수정
+      - 비즈니스 로직과 데이터베이스 접근 로직 분리
 
       - 상세 변경 관련 정보
         - `Application.configureRouting` 함수에 직접 정의했던 것을 `Users.Controller` 클래스에서 `Routing` 객체를 확장해 처리
