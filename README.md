@@ -105,6 +105,22 @@
         - 위 변경에 따라 `Application.module` 함수에서 `configureRouting` 함수 호출 대신 `kodeinApplication` 함수를 호출하고 `bindSingletone` 함수로 `Database`, `UserService` 등록함
         - `configureRouting` 함수를 정의하지 않고 `Users.Controller` 클래스에서 URL 경로를 처리 가능해짐
       
+    - 3/23
+      - package 구조 변경
+        - user
+          - application
+            - UserService
+          - controller
+            - UserController
+          - domain
+            - User
+          - infra
+            - UserDatabaseRepository
+            - UserRepository
+      - KodeinController를 이용해 Routing 자동 등록
+        - UserController가 KodeinController를 상속하고 있었음('ㅁ')
+        - UserController를 KodeinApplication block에 singleton으로 등록하면 경로가 자동 등록됨
+        - Routing.kt 파일 삭제
 
 </details>
 
