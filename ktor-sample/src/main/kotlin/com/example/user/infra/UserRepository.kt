@@ -1,4 +1,6 @@
-package com.example.user
+package com.example.user.infra
+
+import com.example.user.domain.User
 
 interface UserRepository {
     suspend fun create(user: User): Int

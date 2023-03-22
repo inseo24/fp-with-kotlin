@@ -1,5 +1,6 @@
-package com.example.user
+package com.example.user.infra
 
+import com.example.user.domain.User
 import kotlinx.coroutines.Dispatchers
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils

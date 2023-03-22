@@ -1,14 +1,14 @@
 package com.example
 
 import com.example.plugins.DatabaseFactory
-import com.example.plugins.Users
 import com.example.plugins.bindSingleton
 import com.example.plugins.configureHTTP
 import com.example.plugins.configureMonitoring
 import com.example.plugins.configureSerialization
 import com.example.plugins.kodeinApplication
-import com.example.user.UserDatabaseRepository
-import com.example.user.UserService
+import com.example.user.application.UserService
+import com.example.user.controller.UserController
+import com.example.user.infra.UserDatabaseRepository
 import io.ktor.server.application.*
 import io.ktor.server.netty.*
 import org.kodein.di.instance
@@ -21,7 +21,7 @@ fun Application.module() {
         bindSingleton { DatabaseFactory.create(instance()) }
         bindSingleton { UserDatabaseRepository(instance()) }
         bindSingleton { UserService(instance()) }
-        bindSingleton { Users.Controller(this.di) }
+        bindSingleton { UserController(this.di) }
     }
 
     configureHTTP()

@@ -1,13 +1,7 @@
-package com.example.user
+package com.example.user.application
 
-import kotlinx.serialization.Serializable
-
-@Serializable
-data class User(val id: Int, val name: String, val age: Int) {
-    fun update(newName: String, newAge: Int): User {
-        return this.copy(name = newName, age = newAge)
-    }
-}
+import com.example.user.infra.UserRepository
+import com.example.user.domain.User
 
 class UserService(private val userRepository: UserRepository) {
     suspend fun create(user: User): Int = userRepository.create(user)
