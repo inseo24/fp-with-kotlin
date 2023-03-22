@@ -5,11 +5,13 @@ val exposed_version: String by project
 val h2_version: String by project
 val mysql_version: String = "8.0.28"
 val kodein_version: String = "6.5.2"
+val kotest_version = "0.3.9"
 
 plugins {
     kotlin("jvm") version "1.8.0"
     id("io.ktor.plugin") version "2.2.4"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.8.10"
+    id("io.kotest") version "0.3.9"
 }
 
 group = "com.example"
@@ -53,4 +55,9 @@ dependencies {
 
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+
+    // Kotest
+    testImplementation("io.kotest:kotest-runner-junit5-jvm:$kotest_version")
+    testImplementation("io.kotest:kotest-assertions-core-jvm:$kotest_version")
+    testImplementation("io.kotest:kotest-property-jvm:$kotest_version")
 }
