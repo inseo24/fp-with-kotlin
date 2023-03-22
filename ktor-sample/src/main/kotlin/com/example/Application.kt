@@ -6,7 +6,7 @@ import com.example.plugins.configureHTTP
 import com.example.plugins.configureMonitoring
 import com.example.plugins.configureSerialization
 import com.example.plugins.kodeinApplication
-import com.example.user.application.UserService
+import com.example.user.application.UserServiceImpl
 import com.example.user.controller.UserController
 import com.example.user.infra.UserDatabaseRepository
 import io.ktor.server.application.*
@@ -20,7 +20,7 @@ fun Application.module() {
         bindSingleton { environment.config }
         bindSingleton { DatabaseFactory.create(instance()) }
         bindSingleton { UserDatabaseRepository(instance()) }
-        bindSingleton { UserService(instance()) }
+        bindSingleton { UserServiceImpl(instance()) }
         bindSingleton { UserController(this.di) }
     }
 
