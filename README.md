@@ -106,21 +106,15 @@
         - `configureRouting` 함수를 정의하지 않고 `Users.Controller` 클래스에서 URL 경로를 처리 가능해짐
       
     - 3/23
-      - package 구조 변경
-        - user
-          - application
-            - UserService
-          - controller
-            - UserController
-          - domain
-            - User
-          - infra
-            - UserDatabaseRepository
-            - UserRepository
+      - package 구조 변경(User - application, controller, domain, infra)
       - KodeinController를 이용해 Routing 자동 등록
         - UserController가 KodeinController를 상속하고 있었음('ㅁ')
         - UserController를 KodeinApplication block에 singleton으로 등록하면 경로가 자동 등록됨
         - Routing.kt 파일 삭제
+      - UserService를 Interface로 만들고 UserServiceImpl 생성 
+        - 할 필요는 없지만 테코 짜기 전에 그냥 좀 쉽게 하려고 . . . 
+        - UserServiceImpl 만듦에 따라 UserServiceImpl을 binding 해줌
+      - user update 값 nullable 하게 바
 
 </details>
 
