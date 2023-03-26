@@ -19,36 +19,29 @@ class UserController(override val di: DI) : KodeinController() {
         val userService: UserService by di.instance()
 
         resource<Routes.Users> {
-            post {
-                val user = call.receive<User>()
-                val id = userService.create(user)
-                call.respond(HttpStatusCode.Created, id)
-            }
+            post { call.receive<User>().let { call.respond(HttpStatusCode.Created, userService.create(it)) } }
             put {
-                val request = call.receive<User>()
-                val currentUser = userService.read(request.id)
-                val updatedUser =
-                    currentUser?.update(request.name, request.age) ?: throw NoSuchElementException("No User")
-                userService.update(currentUser.id, updatedUser)
+                call.receive<User>().let { request ->
+                    userService.read(request.id)?.also { userService.update(it.id, it.update(request)) }
+                        ?: throw NoSuchElementException("No User")
+                }
                 call.respond(HttpStatusCode.OK)
             }
         }
 
         resource<Routes.User> {
             get {
-                val id = call.parameters["id"]?.toInt() ?: throw IllegalArgumentException("Invalid ID")
-                val user = userService.read(id)
-                if (user != null) {
-                    call.respond(HttpStatusCode.OK, user)
-                } else {
-                    call.respond(HttpStatusCode.NotFound)
-                }
+                call.parameters["id"]?.toIntOrNull()?.let {
+                    userService.read(it)?.let { user -> call.respond(HttpStatusCode.OK, user) }
+                        ?: call.respond(HttpStatusCode.NotFound)
+                } ?: throw IllegalArgumentException("Invalid ID")
             }
 
             delete {
-                val id = call.parameters["id"]?.toInt() ?: throw IllegalArgumentException("Invalid ID")
-                userService.delete(id)
-                call.respond(HttpStatusCode.OK)
+                call.parameters["id"]?.toIntOrNull()?.let {
+                    userService.delete(it)
+                    call.respond(HttpStatusCode.OK)
+                } ?: throw IllegalArgumentException("Invalid ID")
             }
         }
     }
@@ -60,5 +53,4 @@ class UserController(override val di: DI) : KodeinController() {
         @Resource("/users/{id}")
         object User
     }
-
 }

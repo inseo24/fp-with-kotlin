@@ -23,13 +23,10 @@ class UserDatabaseRepository(private val database: Database) : UserRepository {
     }
 
     init {
-        transaction(database) {
-            SchemaUtils.create(Users)
-        }
+        transaction(database) { SchemaUtils.create(Users) }
     }
 
-    suspend fun <T> dbQuery(block: suspend () -> T): T =
-        newSuspendedTransaction(Dispatchers.IO) { block() }
+    suspend fun <T> dbQuery(block: suspend () -> T): T = newSuspendedTransaction(Dispatchers.IO) { block() }
 
     override suspend fun create(user: User): Int = dbQuery {
         Users.insert {
