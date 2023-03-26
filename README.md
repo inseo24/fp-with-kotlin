@@ -116,6 +116,29 @@
         - UserServiceImpl 만듦에 따라 UserServiceImpl을 binding 해줌
       - user update 값 nullable 하게 바
 
+    - 코드 설명  
+    ```kotlin
+    // 제네릭 타입 T에 대해 런타임에도 사용할 수 있도록 reified keyword 사용
+    // 타입 정보가 런타임에도 필요한 이유는, Kodein 라이브러리에서 객체 생성과 객체 관리를 분리해 처리하기 때문임
+    // 객체 생성해 바인딩하는 건 런타임에 수행되어 생성된 객체를 관리하기 위해서는 런타임에도 객체의 타입 정보가 필요함
+
+    // 예시)
+    // DatabaseFactory.create 의 경우 Database 객체를 리턴함. 이 리턴되는 타입이 T로 바인딩 된다.
+    // T로 바인딩된 Database 객체는 함수를 통해 NoArgBindingDI 타입이 확장한 함수 리터럴에서 사용된다.
+    // 예를 들어, UserDatabaseRepository 에서 Database 객체를 매개변수로 받아 생성하는데
+    // bindSingleton { UserDatabaseRepository(instance()) } <- 여기 instance() 호출 시 Database 객체를 주입 받게 된다.
+    inline fun <reified T : Any> DI.MainBuilder.bindSingleton(crossinline instanceProvider: NoArgBindingDI<Any>.() -> T) {
+        bind<T>() with singleton { instanceProvider.invoke(this) }
+    }
+
+    // 람다 표현식 내부에서 return을 사용하지 못하게 crossinline 키워드 사용
+    // 위에서도 말했듯 Kodein 라이브러리는 bind에서 객체를 생성만 하고, 반환하지 않음
+    // bindSingleton 함수 내에서는 instanceProvider.invoke(this) 에 해당하는 람다식이 객체 생성에 해당
+    // 객체 바인딩은 생성된 객체를 Kodein 컨테이너에 바인딩하는 것이고 그게 bind 함수 + with 함수를 써서 바인딩하는 식
+    // 객체의 관리는 Kodein 컨테이너에서 이뤄진다.
+    ```
+
+
 </details>
 
 
