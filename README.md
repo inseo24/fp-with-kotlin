@@ -591,21 +591,21 @@ fun main() = runBlocking {
 
 <details>
     <summary>코루틴 사용하는 코드의 테스트 및 디버깅</summary>
-    
-- 코루틴 사용하는 코드의 테스트 및 디버깅
-  - runBlockingTest
-      - `TestCoroutineScope` 를 생성하고 테스트 별로 코루틴 스코프에서 지정된 코드 블록을 즉시 실행한다.
-      - 코루틴 실행을 제어해 테스트가 완료되기 전에 코루틴이 완료되도록 할 수 있다.
-  - TestCoroutineDispatcher
-      - 코루틴의 타이밍을 제어할 수 있음.
-      - virtual time을 앞당길 수 있어서 delays, timeouts를 테스트 할 때 유용하다.
-  - Debugging
-      - 코루틴을 디버깅 할 때, system property에서 `-Dkotlinx.coroutines.debug` 를 설정해 코루틴 디버거를 사용하도록 설정하거나 kotlinx-coroutines-debug 라이브러리에서 제공하는 DebugProbes API를 사용할 수 있다.
-      - 코루틴 디버거가 활성화되면 IDE의 디버깅 도구를 사용하여 중단점을 설정하고, 변수를 검사하고, 코루틴 코드를 단계별로 살펴볼 수 있음.
-      - DebugProbes.printJob or DebugProbes.dumpCoroutines를 사용하여 런타임에 코루틴의 상태를 print 가능
+
+- runBlockingTest
+    - `TestCoroutineScope` 를 생성하고 테스트 별로 코루틴 스코프에서 지정된 코드 블록을 즉시 실행한다.
+    - 코루틴 실행을 제어해 테스트가 완료되기 전에 코루틴이 완료되도록 할 수 있다.
+- TestCoroutineDispatcher
+    - 코루틴의 타이밍을 제어할 수 있음.
+    - virtual time을 앞당길 수 있어서 delays, timeouts를 테스트 할 때 유용하다.
+- Debugging
+    - 코루틴을 디버깅 할 때, system property에서 `-Dkotlinx.coroutines.debug` 를 설정해 코루틴 디버거를 사용하도록 설정하거나 kotlinx-coroutines-debug 라이브러리에서 제공하는 DebugProbes API를 사용할 수 있다.
+    - 코루틴 디버거가 활성화되면 IDE의 디버깅 도구를 사용하여 중단점을 설정하고, 변수를 검사하고, 코루틴 코드를 단계별로 살펴볼 수 있음.
+    - DebugProbes.printJob or DebugProbes.dumpCoroutines를 사용하여 런타임에 코루틴의 상태를 print 가능
 
 </details>
-                
+           
+------ 
 </details>
 
 <details>
