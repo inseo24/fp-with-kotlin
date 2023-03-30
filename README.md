@@ -632,14 +632,14 @@ fun main() = runBlocking {
 </details>
 
 <details>
-  <summary> 학습 자료4 - FP with Kotlin example</summary>
+  <summary>학습 자료4 - FP with Kotlin example</summary>
 
 - fp-example 폴더 내의 [README.md](https://github.com/inseo24/fp-with-kotlin/tree/main/fp-example#fp-with-kotlin) 참고
 
 </details>
 
 <details>
-  <summary>학습 자료4 - 예시 프로젝트(coffee-ordering-system)</summary>
+  <summary>학습 자료5 - 예시 프로젝트(coffee-ordering-system)</summary>
   
 1. 패키지 구조
 
