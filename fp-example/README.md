@@ -46,3 +46,7 @@
       - `flatMap` or `bind`: 모나드 값을 받아서 내부 데이터를 조작하거나 처리할 수도 있고 그 안에서 연산자를 사용해 연속적으로 처리하고 흐름 제어도 할 수 있다.
         - 이 함수는 `(A) -> Monad<B>` 형태의 함수를 인자로 받아서, `Monad<A>`를 `Monad<B>`로 변환한다.
           - 즉, A 타입의 컨테이너를 받아 B 타입의 컨테이너로 반환한다. 이 과정에서 중첩된 컨테이너를 flatten 하게 만들어주는게 flatMap()
+
+
+- 추가 : Effect(arrow.core.continuations) (`Example4.kt` 예시 코드)
+  - `suspend fun <B> fold(f: suspend (R) -> B, g: suspend (A) -> B): B`를 통해 R 값과 A 값을 B 값으로 매핑함
