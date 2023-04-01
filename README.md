@@ -692,6 +692,27 @@ fun main() = runBlocking {
   - 간단하게 id를 이용해 레코드를 조회하고 없으면 예외 던지게 하는 메서드를 따로 만들 수 있지 않을까 하고 추가함
     - 제네릭이랑 확장함수 써서 작업(`T.findRecordByIdEffect`)
 
+- 하면서 생각난 건데 Either 써서 결과 처리하는 거 `Optional` 이랑 비슷한 거 같다
+  
+  - 이게 `Either`
+  
+  ```kotlin
+    when (val result = Users.findRecordByIdEffect(1).toEither()) {
+          is Either.Left -> println("User not found: ${result.value.id}")
+          is Either.Right -> println("User: ${result.value}")
+      }
+  ```
+  
+  - 이거 Java `Optional`
+  ```java
+    Optional<Menu> result = menuService.findById(id);
+
+    result.ifPresentOrElse(
+        menu -> System.out.println(menu.getName()),
+        () -> System.out.println("Menu not found : " + id)
+    );
+  ```
+  - 함수형이란 거 어디에든 이미 녹아있는데 모르고 써오는 거 아닌가 싶기도 ?
 
 </details>
 
