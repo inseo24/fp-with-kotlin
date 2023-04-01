@@ -689,6 +689,8 @@ fun main() = runBlocking {
 - 추가 : Effect with Exposed `Example5.kt`
   - 만든 것 : 커피 메뉴 조회 API
   - Effect를 사용해 에러 처리가 좀 더 명확하게 되는 것 같고 가독성도 좋은 것 같다. 타입 안전성은 덤인 거 같고?
+  - 간단하게 id를 이용해 레코드를 조회하고 없으면 예외 던지게 하는 메서드를 따로 만들 수 있지 않을까 하고 추가함
+    - 제네릭이랑 확장함수 써서 작업(`T.findRecordByIdEffect`)
 
 
 </details>
