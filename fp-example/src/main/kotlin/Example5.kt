@@ -1,3 +1,4 @@
+import arrow.core.Either
 import arrow.core.continuations.Effect
 import arrow.core.continuations.effect
 import org.jetbrains.exposed.dao.id.IntIdTable
@@ -96,5 +97,29 @@ class MySQLMenuRepository(
             name = row[Menus.name],
             price = row[Menus.price]
         )
+    }
+}
+
+data class EntityNotFoundException(val id: Int) : Exception("Entity not found with id: $id")
+
+abstract class BaseEntityTable(name: String) : IntIdTable(name) {
+    fun findByID(id: Int): ResultRow? {
+        return select { this@BaseEntityTable.id eq id }.singleOrNull()
+    }
+}
+
+object Users : BaseEntityTable("users") {
+    val name = varchar("name", 255)
+    val age = integer("age")
+}
+
+suspend fun <T : BaseEntityTable> T.findRecordByIdEffect(id: Int): Effect<EntityNotFoundException, ResultRow> = effect {
+    findByID(id) ?: shift(EntityNotFoundException(id))
+}
+
+suspend fun test() {
+    when (val result = Users.findRecordByIdEffect(1).toEither()) {
+        is Either.Left -> println("User not found: ${result.value.id}")
+        is Either.Right -> println("User: ${result.value}")
     }
 }
