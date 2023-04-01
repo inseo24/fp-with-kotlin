@@ -686,6 +686,11 @@ fun main() = runBlocking {
   - `suspend fun <B> fold(f: suspend (R) -> B, g: suspend (A) -> B): B`를 통해 R 값과 A 값을 B 값으로 매핑함
 
 
+- 추가 : Effect with Exposed `Example5.kt`
+  - 만든 것 : 커피 메뉴 조회 API
+  - Effect를 사용해 에러 처리가 좀 더 명확하게 되는 것 같고 가독성도 좋은 것 같다. 타입 안전성은 덤인 거 같고?
+
+
 </details>
 
 <details>
