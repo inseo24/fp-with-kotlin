@@ -1,75 +1,78 @@
 import arrow.core.continuations.Effect
 import arrow.core.continuations.effect
 
-sealed interface UserError
+class Example4 {
 
-object UserNotFound : UserError {
-    override fun toString() = "UserNotFound"
-}
+    sealed interface UserError
 
-object InvalidUserId : UserError {
-    override fun toString() = "InvalidUserId"
-}
-
-data class User(
-    val id: Int,
-    val name: String
-)
-
-class UserRepository {
-    private val users = mutableMapOf<Int, User>()
-
-    fun save(user: User) {
-        users[user.id] = user
+    object UserNotFound : UserError {
+        override fun toString() = "UserNotFound"
     }
 
-    fun findById(id: Int): User? {
-        return users[id]
+    object InvalidUserId : UserError {
+        override fun toString() = "InvalidUserId"
     }
-}
 
-fun registerUser(repository: UserRepository, id: Int, name: String): Effect<InvalidUserId, User> = effect {
-    if (id <= 0) {
-        shift(InvalidUserId)
-    } else {
-        val user = User(id, name)
-        repository.save(user)
-        user
+    data class User(
+        val id: Int,
+        val name: String
+    )
+
+    class UserRepository {
+        private val users = mutableMapOf<Int, User>()
+
+        fun save(user: User) {
+            users[user.id] = user
+        }
+
+        fun findById(id: Int): User? {
+            return users[id]
+        }
     }
-}
 
-fun getUser(repository: UserRepository, id: Int): Effect<UserError, User> = effect {
-    if (id <= 0) {
-        shift(InvalidUserId)
-    } else {
-        repository.findById(id) ?: shift(UserNotFound)
+    fun registerUser(repository: UserRepository, id: Int, name: String): Effect<InvalidUserId, User> = effect {
+        if (id <= 0) {
+            shift(InvalidUserId)
+        } else {
+            val user = User(id, name)
+            repository.save(user)
+            user
+        }
     }
-}
 
-suspend fun main() {
-    val repository = UserRepository()
+    fun getUser(repository: UserRepository, id: Int): Effect<UserError, User> = effect {
+        if (id <= 0) {
+            shift(InvalidUserId)
+        } else {
+            repository.findById(id) ?: shift(UserNotFound)
+        }
+    }
 
-    val user1 = registerUser(repository, 1, "Seoin").fold(
-        { "Error : $it" },
-        { "User : $it" }
-    )
-    println("유저 등록 성공: $user1")
+    suspend fun main() {
+        val repository = UserRepository()
 
-    val invalidUser = registerUser(repository, -1, "Invalid User").fold(
-        { "Error : $it" },
-        { "User : $it" }
-    )
-    println("Invalid User Id: $invalidUser")
+        val user1 = registerUser(repository, 1, "Seoin").fold(
+            { "Error : $it" },
+            { "User : $it" }
+        )
+        println("유저 등록 성공: $user1")
 
-    val retrievedUser = getUser(repository, 1).fold(
-        { "Error : $it" },
-        { "User : $it" }
-    )
-    println("조회된 유저: $retrievedUser")
+        val invalidUser = registerUser(repository, -1, "Invalid User").fold(
+            { "Error : $it" },
+            { "User : $it" }
+        )
+        println("Invalid User Id: $invalidUser")
 
-    val nonExistentUser = getUser(repository, 2).fold(
-        { "Error : $it" },
-        { "User : $it" }
-    )
-    println("존재하지 않는 유저: $nonExistentUser")
+        val retrievedUser = getUser(repository, 1).fold(
+            { "Error : $it" },
+            { "User : $it" }
+        )
+        println("조회된 유저: $retrievedUser")
+
+        val nonExistentUser = getUser(repository, 2).fold(
+            { "Error : $it" },
+            { "User : $it" }
+        )
+        println("존재하지 않는 유저: $nonExistentUser")
+    }
 }
