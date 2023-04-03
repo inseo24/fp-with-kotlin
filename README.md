@@ -714,6 +714,12 @@ fun main() = runBlocking {
   ```
   - 함수형이란 거 어디에든 이미 녹아있는데 모르고 써오는 거 아닌가 싶기도 ?
 
+- 추가 예정 : Effect with Exposed `Example6.kt`
+  - 커피 주문 API
+  
+- 추가 예정 : Effect with Exposed `Example7.kt`
+  - 커피  API
+
 </details>
 
 <details>
