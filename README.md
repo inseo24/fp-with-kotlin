@@ -722,7 +722,69 @@ fun main() = runBlocking {
 </details>
 
 <details>
-  <summary>학습 자료5 - 예시 프로젝트(coffee-ordering-system)</summary>
+  <summary>학습 자료5 - Effect Docs 읽기</summary>
+
+
+- [출처](https://arrow-kt.io/learn/overview/)
+
+1. 에러 처리
+  - Type에 의한 오류 처리
+  - Either, lor, Raise
+    - Raise : 실패할 가능성이 있는 연산을 실행하는 블록, 결과값 대신 논리적인 실패 반환
+      - 아래 예시에서 getUser 함수는 id가 0보다 큰 경우 User를 반환하고, 그렇지 않은 경우 UserNotFound라는 논리적인 실패를 반환함. 
+      
+      ```kotlin
+      data class UserNotFound(val message: String)
+
+      fun Raise<UserNotFound>.getUser(id: Long): User =
+        if (id > 0) User(id)
+        else raise(UserNotFound("User not found with id: $id"))
+      ```
+    
+    - lor : 연산 결과가 성공할 수도 있고 실패일 수도 있으면서 둘다 모두 존재할 수도 있는 연산을 처리
+      - getUser 와 processUser 함수 2개를 조합해 연속적인 연산 수행
+      - flatMap 함수를 사용해 getUser 함수의 결과를 processUser 함수의 입력값으로 넘김 -> lor 타입으로 반환하는 값을 다룰 수 
+      
+      ```kotlin
+      data class UserNotFound(val message: String)
+      data class User(val id: Long, val name: String)
+
+      fun getUser(id: Long): Ior<UserNotFound, User> =
+        if (id > 0) User(id, "John Doe").rightIor()
+        else UserNotFound("User not found with id: $id").leftIor()
+
+      fun processUser(user: User): Ior<UserNotFound, String> =
+        if (user.name.isNotEmpty()) "Processed ${user.name}".rightIor()
+        else UserNotFound("User has no name").leftIor()
+
+      fun example() {
+        val res = getUser(1).flatMap(::processUser)
+
+        when (res) {
+          is Ior.Left -> fail("A logical failure occurred!")
+          is Ior.Right -> res.value shouldBe "Processed John Doe"
+          is Ior.Both -> {
+            fail("A logical failure and a value occurred!")
+          }
+        }
+
+        res.fold(
+          { fail("A logical failure occurred!") },
+          { it shouldBe "Processed John Doe" },
+          { _, _ -> fail("A logical failure and a value occurred!") }
+        )
+      }
+      ```
+
+2. Option
+  - Option : 값이 존재할 수도 있고, 존재하지 않을 수도 있는 컨테이너 타입
+    - 값이 존재하는 경우 Some<A> 타입의 인스턴스가 되고, 값이 존재하지 않으면 None 타입의 인스턴스가 된다.
+    - `Example8.kt` 참고
+
+</details>
+
+<details>
+  <summary>학습 자료6 - 예시 프로젝트(coffee-ordering-system)</summary>
   
 1. 패키지 구조
 
