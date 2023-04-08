@@ -780,6 +780,13 @@ fun main() = runBlocking {
   - Option : 값이 존재할 수도 있고, 존재하지 않을 수도 있는 컨테이너 타입
     - 값이 존재하는 경우 Some<A> 타입의 인스턴스가 되고, 값이 존재하지 않으면 None 타입의 인스턴스가 된다.
     - `Example8.kt` 참고
+    
+3. Immutable data
+
+  - Optics
+  
+    <img width="654" alt="image" src="https://user-images.githubusercontent.com/84627144/230722763-f07307e5-02d4-4cb0-a655-e369dbaf1a62.png">
+
 
 </details>
 
