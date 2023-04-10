@@ -14,13 +14,14 @@ repositories {
 
 dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-    implementation("io.arrow-kt:arrow-core:1.1.5")
+    implementation("io.arrow-kt:arrow-core:1.2.0-RC")
+    implementation("io.arrow-kt:arrow-fx-coroutines:1.2.0-RC")
 
     implementation("org.jetbrains.exposed:exposed-core:0.40.1")
     implementation("org.jetbrains.exposed:exposed-dao:0.40.1")
     implementation("org.jetbrains.exposed:exposed-jdbc:0.40.1")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("훔mysql:mysql-connector-java:8.0.32")
+    implementation("mysql:mysql-connector-java:8.0.32")
 
     testImplementation(kotlin("test"))
 }
