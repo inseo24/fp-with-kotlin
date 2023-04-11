@@ -783,11 +783,17 @@ fun main() = runBlocking {
     
 3. Immutable data
 
+<<<<<<< HEAD
+3. Immutable data
+    
+
+=======
   - Optics
   
     <img width="654" alt="image" src="https://user-images.githubusercontent.com/84627144/230722763-f07307e5-02d4-4cb0-a655-e369dbaf1a62.png">
 
 
+>>>>>>> 21618e9fd646cc59ded9129d46bb31b93d5ce50d
 </details>
 
 <details>
